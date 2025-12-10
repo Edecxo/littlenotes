@@ -1,3 +1,6 @@
+import storage
+import datetime
+
 '''
 Functions for converting data into json format as specified below.
 
@@ -18,9 +21,24 @@ Note json format
 '''
 
 
-def note_format(title, body, timestamp):
+def note_format(title, body):
     '''
     Formats the note into json.
     Refer to docstring at the beginning of this file.
     '''
-    pass
+    new_id = str(1)
+    existing_ids = [note['id'] for note in storage.note_list()]
+    while new_id in existing_ids:
+        new_id = str(int(new_id) + 1)
+
+    now = datetime.datetime.now()
+    new_note = {
+            'id': new_id,
+            'title': title,
+            'body': body,
+            'timestamp': {
+                'created': now,
+                'updated': now
+            }
+    }
+    return new_note
