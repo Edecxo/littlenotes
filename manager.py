@@ -31,7 +31,9 @@ def note_format(title, body):
     while new_id in existing_ids:
         new_id = str(int(new_id) + 1)
 
-    now = datetime.datetime.now()
+    dt = datetime.datetime.now()
+    now = datetime.datetime.strftime(dt, "%b %d %Y %H:%M")
+
     new_note = {
             'id': new_id,
             'title': title,
